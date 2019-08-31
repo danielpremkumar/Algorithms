@@ -4,7 +4,8 @@ import java.math.BigInteger;
 import java.util.logging.Logger;
 
 public class Recursion {
-    static Logger logger  = Logger.getLogger(Recursion.class.getName());
+    static Logger logger = Logger.getLogger(Recursion.class.getName());
+
     public static void main(String[] args) {
         logger.info(factorial(5000).toString());
     }
