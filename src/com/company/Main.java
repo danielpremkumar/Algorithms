@@ -1,7 +1,7 @@
 package com.company;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -9,9 +9,60 @@ import java.util.stream.Stream;
 public class Main {
 
     public static void main(String[] args) {
-        longestCommonSubSequence();
+        //System.out.println(isAnagram("asd","asd."));
+        String a = "asdsa asdsad eret a'as asdsa. sadas,";
+        Pattern p = Pattern.compile("[A-Za-z !,?._'@]+");
+        int[] b = Arrays.asList(p.split(a)).stream().mapToInt(Integer::parseInt).toArray();
+    /*    int[] intArray = Stream.of(b).mapToInt(Integer::parseInt).toArray();
+
+        int maxArea = 0;
+        for (Integer curr : intList) {
+            for (Integer next : intList) {
+                if (curr.equals(next)) continue;
+                int base = Math.abs(curr - next);
+                int height = Math.min(curr, next);
+                int area = base * height;
+                if (area > maxArea) maxArea = area;
+            }
+        }
+        intList.stream().forEach(num -> );
+        for (String c: b) {
+            System.out.println("sadsad"+c);
+        }*/
+
+    }
+    static boolean isAnagram(String a, String b) {
+        java.util.Map<Character, Integer> ma = new java.util.HashMap<>();
+        java.util.Map<Character, Integer> mb = new java.util.HashMap<>();
+        seg(a, ma);
+        seg(b, mb);
+
+        for (java.util.Map.Entry<Character, Integer> c : ma.entrySet()) {
+            if(mb.size() != ma.size() || !mb.containsKey(c.getKey()) || mb.get(c.getKey()) != c.getValue()) {
+                return false;
+            }
+        }
+        return true;
+
     }
 
+    private static void seg(String a, java.util.Map<Character, Integer> ma) {
+        if (null != a) {
+            a.toLowerCase().chars().mapToObj(c -> (char) c)
+                    .forEach(c -> {
+                        logic(ma, c);
+                    });
+        }
+    }
+
+    private static void logic(java.util.Map<Character, Integer> mb, Character c) {
+        if (mb.containsKey(c)) {
+            int weight = mb.get(c);
+            mb.put(c, weight + 1);
+        } else {
+            mb.put(c, 1);
+        }
+    }
     /**
      * This method is used to find the largest continuous character array in sequential order
      * between to String S1 and S2
