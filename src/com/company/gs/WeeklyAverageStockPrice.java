@@ -11,15 +11,15 @@ public class WeeklyAverageStockPrice {
         for (int i=0; i<weeklyPrices.length;i++) {
             weeklyPrices[i] = averageWeeklyPrice(dailyPrice, i + 6);
         }
-        for (int x : weeklyPrices             ) {
-
+        for (String x : weeklyPrices) {
+            System.out.println(x);
         }
     }
 
     private static String averageWeeklyPrice(int[] dailyPrice, int i) {
         float average = 0.0f;
-        for (int index = i; index>= i-6;i--) {
-            average += dailyPrice[i];
+        for (int index = i; index>= i-6;index--) {
+            average += dailyPrice[index];
         }
         average/=7;
         return df.format(average);
